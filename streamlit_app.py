@@ -43,33 +43,43 @@ with st.form("relocation_form"):
     submitted = st.form_submit_button("Get My STL Match")
 
 if submitted:
-    with st.spinner("Finding your STL spot..."):
+    with st.spinner("Creating your STL relocation plan..."):
         move_date_str = move_date.strftime("%B %d, %Y")
-        prompt = f"""You are a helpful St. Louis relocation assistant. A person is moving from {current_city} to St. Louis and gave the following info:
-- Reason for move: {reason}
-- Budget: {budget}
-- Commute preference: {commute}
-- Address of work: {work_address}
-- Home type: {', '.join(home_type)}
-- Must-have features: {', '.join(features)}
-- Move-in date: {move_date_str}
+        prompt = f"""You are a relocation assistant working for a local St. Louis real estate team. 
+The user below is considering a move and just filled out our relocation form.
 
-Based on this, give a personalized relocation recommendation including 2-3 STL neighborhoods that match, school advice if applicable, and a next-step tip. End with a friendly invitation to schedule a relocation call."""
+Here are the details:
+- Full Name: {name}
+- Email: {email}
+- Phone: {phone}
+- Current City: {current_city}
+- Move-in Date: {move_date_str}
+- Work Address: {work_address}
+- Reason for Moving: {reason}
+- Budget: {budget}
+- Commute Preference: {commute}
+- Home Type: {', '.join(home_type)}
+- Must-Have Features: {', '.join(features)}
+
+Using this info, provide a short and helpful relocation insight for the client. 
+Include 2–3 St. Louis neighborhoods that align with their preferences, and why. 
+Then close with a friendly message letting them know our real estate team will be reaching out to help with the next steps — including home searches, tours, and local guidance.
+"""
         response = openai.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "You are a relocation expert for people moving to St. Louis."},
+                {"role": "system", "content": "You are a relocation expert on a real estate team helping clients move to St. Louis."},
                 {"role": "user", "content": prompt}
             ]
         )
 
         advice = response.choices[0].message.content
-        st.subheader("🎯 Your STL Relocation Insights")
+        st.subheader("📍 Your STL Relocation Overview")
         st.markdown(advice)
 
         st.markdown("---")
-        st.markdown("✅ **Want help finding a home that matches your exact needs?**")
-        st.markdown("[📅 Schedule My Relocation Call](https://calendly.com/YOUR-CALENDAR-LINK)")
+        st.markdown("✅ **Thanks for sharing your goals — we’ll be reaching out shortly to help guide your STL home search.**")
+        st.markdown("[📅 Prefer to chat sooner? Schedule a call here.](https://calendly.com/YOUR-CALENDAR-LINK)")
 
 
 
