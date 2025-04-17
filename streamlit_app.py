@@ -16,10 +16,10 @@ with st.form("relocation_form"):
     email = st.text_input("Email Address")
     phone = st.text_input("Phone Number")
     move_date = st.date_input("Target Move-In Date", value=datetime.date.today())
-    st.markdown(f"📅 Selected Date: **{move_date.strftime('%B %d, %Y')}**")  # Friendly format shown below input
+    st.markdown(f"📅 Selected Date: **{move_date.strftime('%B %d, %Y')}**")
 
     current_city = st.text_input("Current City & State")
-    work_address = st.text_input("Address of Work (for commute matching)")
+    work_address = st.text_input("Full Work Address (Street, City, State, ZIP)")
 
     reason = st.selectbox("What's the main reason for your move?", ["Job", "Family", "Lifestyle", "Retirement", "College", "Other"])
     budget = st.selectbox("What’s your home budget?", ["Under $200k", "$200k–$300k", "$300k–$400k", "$400k–$500k", "Over $500k"])
@@ -70,5 +70,6 @@ Based on this, give a personalized relocation recommendation including 2-3 STL n
         st.markdown("---")
         st.markdown("✅ **Want help finding a home that matches your exact needs?**")
         st.markdown("[📅 Schedule My Relocation Call](https://calendly.com/YOUR-CALENDAR-LINK)")
+
 
 
