@@ -1,3 +1,4 @@
+
 import streamlit as st
 import openai
 import datetime
@@ -42,8 +43,7 @@ with st.form("relocation_form"):
 if submitted:
     with st.spinner("Finding your STL spot..."):
         move_date_str = move_date.strftime("%B %d, %Y")
-        prompt = f"""
-You are a helpful St. Louis relocation assistant. A person is moving from {current_city} to St. Louis and gave the following info:
+        prompt = f"""You are a helpful St. Louis relocation assistant. A person is moving from {current_city} to St. Louis and gave the following info:
 - Reason for move: {reason}
 - Budget: {budget}
 - Commute preference: {commute}
@@ -52,8 +52,7 @@ You are a helpful St. Louis relocation assistant. A person is moving from {curre
 - Must-have features: {', '.join(features)}
 - Move-in date: {move_date_str}
 
-Based on this, give a personalized relocation recommendation including 2-3 STL neighborhoods that match, school advice if applicable, and a next-step tip. End with a friendly invitation to schedule a relocation call.
-"""
+Based on this, give a personalized relocation recommendation including 2-3 STL neighborhoods that match, school advice if applicable, and a next-step tip. End with a friendly invitation to schedule a relocation call."""
         response = openai.chat.completions.create(
             model="gpt-4",
             messages=[
@@ -69,7 +68,5 @@ Based on this, give a personalized relocation recommendation including 2-3 STL n
         st.markdown("---")
         st.markdown("✅ **Want help finding a home that matches your exact needs?**")
         st.markdown("[📅 Schedule My Relocation Call](https://calendly.com/YOUR-CALENDAR-LINK)")
-Based on this, give a personalized relocation recommendation including 2-3 STL neighborhoods that match, school advice if applicable, and a next-step tip. End with a friendly invitation to schedule a relocation call.
-"""
 
 
