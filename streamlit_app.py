@@ -16,6 +16,8 @@ with st.form("relocation_form"):
     email = st.text_input("Email Address")
     phone = st.text_input("Phone Number")
     move_date = st.date_input("Target Move-In Date", value=datetime.date.today())
+    st.markdown(f"📅 Selected Date: **{move_date.strftime('%B %d, %Y')}**")  # Friendly format shown below input
+
     current_city = st.text_input("Current City & State")
     work_address = st.text_input("Address of Work (for commute matching)")
 
