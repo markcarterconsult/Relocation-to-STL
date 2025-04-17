@@ -1,4 +1,3 @@
-
 import streamlit as st
 import openai
 import datetime
@@ -40,7 +39,7 @@ You are a helpful St. Louis relocation assistant. A person is moving from {curre
 
 Based on this, give a personalized relocation recommendation including 2-3 STL neighborhoods that match, school advice if applicable, and a next-step tip. End with a friendly invitation to schedule a relocation call.
 """
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a relocation expert for people moving to St. Louis."},
@@ -48,7 +47,7 @@ Based on this, give a personalized relocation recommendation including 2-3 STL n
             ]
         )
 
-        advice = response["choices"][0]["message"]["content"]
+        advice = response.choices[0].message.content
         st.subheader("🎯 Your STL Relocation Insights")
         st.markdown(advice)
 
